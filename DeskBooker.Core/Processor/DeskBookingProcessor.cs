@@ -24,9 +24,8 @@ public class DeskBookingProcessor
         }
 
         var availableDesks = _deskRepository.GetAvailableDesks(request.Date);
-        if (availableDesks.Any())
+        if (availableDesks.FirstOrDefault() is Desk availableDesk)
         {
-            var availableDesk = availableDesks.First();
             var deskBooking = Create<DeskBooking>(request);
             deskBooking.DeskID = availableDesk.ID;
             _deskBookingRepository.Save(deskBooking);
