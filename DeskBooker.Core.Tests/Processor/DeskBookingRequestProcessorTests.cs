@@ -1,33 +1,33 @@
 ﻿using System;
+using DeskBooker.Core.Domain;
 using Xunit;
 
-namespace DeskBooker.Core.Processor
+namespace DeskBooker.Core.Processor;
+
+public class DeskBookingRequestProcessorTests
 {
-    public class DeskBookingRequestProcessorTests
+    [Fact]
+    public void ShouldReturnDeskBookingResultWithRequestValues()
     {
-        [Fact]
-        public void ShouldReturnDeskBookingResultWithRequestValues()
+        // Arrange
+        var request = new DeskBookingRequest
         {
-            // Arrange
-            var request = new DeskBookingRequest
-            {
-                FirstName = "Stephen",
-                LastName = "Gowen",
-                Email = "sjgowen@gmail.com",
-                Date = new DateTime(2022, 4, 30)
-            };
+            FirstName = "Stephen",
+            LastName = "Gowen",
+            Email = "sjgowen@gmail.com",
+            Date = new DateTime(2022, 4, 30)
+        };
 
-            var processor = new DeskBookingRequestProcessor();
+        var processor = new DeskBookingRequestProcessor();
 
-            // Act
-            DeskBookingResult result = processor.BookDesk(request);
+        // Act
+        DeskBookingResult result = processor.BookDesk(request);
 
-            // Assert
-            Assert.NotNull(result);
-            Assert.Equal(request.FirstName, result.FirstName);
-            Assert.Equal(request.LastName, result.LastName);
-            Assert.Equal(request.Email, result.Email);
-            Assert.Equal(request.Date, result.Date);
-        }
+        // Assert
+        Assert.NotNull(result);
+        Assert.Equal(request.FirstName, result.FirstName);
+        Assert.Equal(request.LastName, result.LastName);
+        Assert.Equal(request.Email, result.Email);
+        Assert.Equal(request.Date, result.Date);
     }
 }
