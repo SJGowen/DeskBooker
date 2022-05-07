@@ -10,7 +10,13 @@ namespace DeskBooker.Core.Processor
 
         internal DeskBookingResult BookDesk(DeskBookingRequest request)
         {
-            throw new NotImplementedException();
+            return new DeskBookingResult
+            {
+                FirstName = request.FirstName,
+                LastName = request.LastName,
+                Email = request.Email,
+                Date = request.Date
+            };
         }
     }
 }
