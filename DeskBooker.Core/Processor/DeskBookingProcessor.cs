@@ -21,7 +21,12 @@ public class DeskBookingProcessor
             throw new ArgumentNullException(nameof(request));
         }
 
-        _deskBookingRepository.Save(Create<DeskBooking>(request));
+        var availableDesks = _deskRepository.GetAvailableDesks(request.Date);
+        if (availableDesks.Count() > 0)
+        {
+            _deskBookingRepository.Save(Create<DeskBooking>(request));
+        }
+        
 
         return Create<DeskBookingResult>(request);
     }
