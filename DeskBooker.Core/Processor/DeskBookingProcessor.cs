@@ -31,6 +31,7 @@ public class DeskBookingProcessor
             var deskBooking = Create<DeskBooking>(request);
             deskBooking.DeskID = availableDesk.ID;
             _deskBookingRepository.Save(deskBooking);
+            result.DeskBookingID = deskBooking.ID;
             result.Code = DeskBookingResultCode.Success;
         }
         else
