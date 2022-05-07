@@ -3,9 +3,9 @@ using System;
 
 namespace DeskBooker.Core.Processor;
 
-public class DeskBookingRequestProcessor
+public class DeskBookingProcessor
 {
-    public DeskBookingRequestProcessor()
+    public DeskBookingProcessor()
     {
     }
 

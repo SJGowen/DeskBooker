@@ -4,13 +4,13 @@ using Xunit;
 
 namespace DeskBooker.Core.Processor;
 
-public class DeskBookingRequestProcessorTests
+public class DeskBookingProcessorTests
 {
-    private readonly DeskBookingRequestProcessor _processor;
+    private readonly DeskBookingProcessor _processor;
 
-    public DeskBookingRequestProcessorTests()
+    public DeskBookingProcessorTests()
     {
-        _processor = new DeskBookingRequestProcessor();
+        _processor = new DeskBookingProcessor();
     }
 
     [Fact]
