@@ -20,6 +20,14 @@ public class DeskBookingProcessor
             throw new ArgumentNullException(nameof(request));
         }
 
+        _deskBookingRepository.Save(new DeskBooking
+        {
+            FirstName = request.FirstName,
+            LastName = request.LastName,
+            Email = request.Email,
+            Date = request.Date
+        });
+
         return new DeskBookingResult
         {
             FirstName = request.FirstName,
