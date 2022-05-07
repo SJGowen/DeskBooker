@@ -2,5 +2,5 @@
 
 public class Desk
 {
-
+    public int ID { get; set; }
 }
