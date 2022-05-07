@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using DeskBooker.Core.DataInterface;
 using DeskBooker.Core.Domain;
 using Moq;
@@ -9,8 +10,10 @@ namespace DeskBooker.Core.Processor;
 public class DeskBookingProcessorTests
 {
     private readonly DeskBookingRequest _deskBookingRequest;
+    private readonly List<Desk> _availableDesks;
     private readonly DeskBookingProcessor _deskBookingProcessor;
     private readonly Mock<IDeskBookingRepository> _mockDeskBookingRepository;
+    private readonly Mock<IDeskRepository> _mockDeskRepository;
 
     public DeskBookingProcessorTests()
     {
@@ -22,8 +25,16 @@ public class DeskBookingProcessorTests
             Date = new DateTime(2022, 4, 30)
         };
 
+        _availableDesks = new List<Desk>
+        {
+            new Desk()
+        };
+
         _mockDeskBookingRepository = new Mock<IDeskBookingRepository>();
-        _deskBookingProcessor = new DeskBookingProcessor(_mockDeskBookingRepository.Object);
+        _mockDeskRepository = new Mock<IDeskRepository>();
+        _mockDeskRepository.Setup(x => x.GetAvailableDesks(_deskBookingRequest.Date)).Returns(_availableDesks);
+
+        _deskBookingProcessor = new DeskBookingProcessor(_mockDeskBookingRepository.Object, _mockDeskRepository.Object);
     }
 
     [Fact]
@@ -65,6 +76,15 @@ public class DeskBookingProcessorTests
         Assert.Equal(_deskBookingRequest.LastName, savedDeskBooking.LastName);
         Assert.Equal(_deskBookingRequest.Email, savedDeskBooking.Email);
         Assert.Equal(_deskBookingRequest.Date, savedDeskBooking.Date);
+    }
 
+    [Fact]
+    public void ShouldNotSaveDeskBookingIfDeskNotAvailable()
+    {
+        _availableDesks.Clear();
+
+        _deskBookingProcessor.BookDesk(_deskBookingRequest);
+
+        _mockDeskBookingRepository.Verify(x => x.Save(It.IsAny<DeskBooking>()), Times.Never);
     }
 }
