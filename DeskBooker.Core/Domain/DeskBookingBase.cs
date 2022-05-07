@@ -1,4 +1,6 @@
-﻿namespace DeskBooker.Core.Domain;
+﻿using System;
+
+namespace DeskBooker.Core.Domain;
 
 public class DeskBookingBase
 {

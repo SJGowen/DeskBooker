@@ -1,4 +1,6 @@
-﻿using DeskBooker.Core.DataInterface;
+﻿using System;
+using System.Linq;
+using DeskBooker.Core.DataInterface;
 using DeskBooker.Core.Domain;
 
 namespace DeskBooker.Core.Processor;
