@@ -60,7 +60,7 @@ public class DeskBookingProcessorTests
     [Fact]
     public void ShouldSaveDeskBooking()
     {
-        DeskBooking savedDeskBooking = null;
+        DeskBooking? savedDeskBooking = null;
         _mockDeskBookingRepository.Setup(x => x.Save(It.IsAny<DeskBooking>())).
             Callback<DeskBooking>(deskBooking =>
             {
@@ -72,10 +72,10 @@ public class DeskBookingProcessorTests
         _mockDeskBookingRepository.Verify(x => x.Save(It.IsAny<DeskBooking>()), Times.Once);
 
         Assert.NotNull(savedDeskBooking);
-        Assert.Equal(_deskBookingRequest.FirstName, savedDeskBooking.FirstName);
-        Assert.Equal(_deskBookingRequest.LastName, savedDeskBooking.LastName);
-        Assert.Equal(_deskBookingRequest.Email, savedDeskBooking.Email);
-        Assert.Equal(_deskBookingRequest.Date, savedDeskBooking.Date);
+        Assert.Equal(_deskBookingRequest.FirstName, savedDeskBooking?.FirstName);
+        Assert.Equal(_deskBookingRequest.LastName, savedDeskBooking?.LastName);
+        Assert.Equal(_deskBookingRequest.Email, savedDeskBooking?.Email);
+        Assert.Equal(_deskBookingRequest.Date, savedDeskBooking?.Date);
     }
 
     [Fact]

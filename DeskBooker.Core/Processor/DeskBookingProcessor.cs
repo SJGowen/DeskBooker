@@ -14,7 +14,7 @@ public class DeskBookingProcessor
         _deskRepository = deskRepository;
     }
 
-    public DeskBookingResult BookDesk(DeskBookingRequest request)
+    public DeskBookingResult BookDesk(DeskBookingRequest? request)
     {
         if (request == null)
         {
@@ -22,7 +22,7 @@ public class DeskBookingProcessor
         }
 
         var availableDesks = _deskRepository.GetAvailableDesks(request.Date);
-        if (availableDesks.Count() > 0)
+        if (availableDesks.Any())
         {
             _deskBookingRepository.Save(Create<DeskBooking>(request));
         }
